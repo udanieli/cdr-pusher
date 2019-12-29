@@ -3,7 +3,7 @@
 # ---------------------
 
 # storage_source_type: DB backend type where CDRs are stored
-# (accepted values: "sqlite3" and "mysql")
+# (accepted values: "sqlite3", "mysql" and "postgres")
 storage_source: "sqlite3"
 
 #
@@ -23,6 +23,12 @@ db_file: "./sqlitedb/cdr.db"
 # [username[:password]@][protocol[(address)]]/dbname[?param1=value1&...&paramN=valueN]
 # eg. db_mysql_connectionstring: "username:password@tcp(127.0.0.1:3306)/asterisk"
 db_mysql_connectionstring: ""
+
+# Use this with Postgres
+#
+# example:
+# db_pg_connectionstring: "user=postgres password=password host=localhost port=5432 dbname=asteriskcdrdb sslmode=disable"
+db_pg_connectionstring: ""
 
 # db_table: the DB table name
 db_table: "cdr"

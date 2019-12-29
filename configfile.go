@@ -45,6 +45,7 @@ type Config struct {
 	FakeCDR            string        "fake_cdr"
 	FakeAmountCDR      int           "fake_amount_cdr"
 	SrcMysqlDNS        string        "db_mysql_connectionstring"
+	SrcPGConnString    string        "db_pg_connectionstring"
 }
 
 var config = Config{}

@@ -15,6 +15,7 @@ import (
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/mattn/go-sqlite3"
+	_ "github.com/lib/pq"
 	// "github.com/coopernurse/gorp"
 	"errors"
 	log "github.com/sirupsen/logrus"
@@ -90,20 +91,21 @@ func (f *SQLFetcher) Init(DBFile string, DBTable string, MaxFetchBatch int, cdrF
 // Connect will help to connect to the DBMS, here we implemented the connection to SQLite
 func (f *SQLFetcher) Connect() error {
 	var err error
-	if f.DBType == "sqlite3" {
+	switch f.DBType {
+	case "sqlite3":
 		f.IDField = "rowid"
 		f.db, err = sql.Open("sqlite3", f.DBFile)
 		if err != nil {
 			log.Error("Failed to connect", err)
 			return err
 		}
-	} else if f.DBType == "mysql" {
+	case "mysql", "postgres":
 		f.db, err = sql.Open(f.DBType, f.ConnString)
 		if err != nil {
 			log.Error("Failed to connect", err)
 			return err
 		}
-	} else {
+	default:
 		log.Error("DBType not supported!")
 		return errors.New("DBType not supported!")
 	}

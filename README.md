@@ -76,6 +76,12 @@ Config file `/etc/cdr-pusher.yaml`:
     # eg. db_mysql_connectionstring: "username:password@tcp(127.0.0.1:3306)/asterisk"
     db_mysql_connectionstring: ""
 
+    # Use this with Postgres
+    #
+    # example:
+    # db_pg_connectionstring: "user=postgres password=password host=localhost port=5432 dbname=asteriskcdrdb sslmode=disable"
+    db_pg_connectionstring: ""
+
     # db_table: the DB table name
     db_table: "cdr"
 
