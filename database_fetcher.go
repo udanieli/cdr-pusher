@@ -28,7 +28,7 @@ import (
 type SQLFetcher struct {
 	db            *sql.DB
 	DBFile        string
-	DNS           string
+	ConnString    string
 	DBType        string
 	DBTable       string
 	DBFlagField   string
@@ -63,12 +63,12 @@ type UpdateCDR struct {
 // Init is a constructor for SQLFetcher
 // It will help setting DBFile, DBTable, MaxFetchBatch and cdrFields
 func (f *SQLFetcher) Init(DBFile string, DBTable string, MaxFetchBatch int, cdrFields []ParseFields,
-	DBIdField string, DBFlagField string, DBType string, DNS string) {
+	DBIdField string, DBFlagField string, DBType string, ConnString string) {
 	f.db = nil
 	f.DBFile = DBFile
 	f.DBTable = DBTable
 	f.DBType = DBType
-	f.DNS = DNS
+	f.ConnString = ConnString
 	f.MaxFetchBatch = MaxFetchBatch
 	f.numFetched = 0
 	f.cdrFields = cdrFields
@@ -98,7 +98,7 @@ func (f *SQLFetcher) Connect() error {
 			return err
 		}
 	} else if f.DBType == "mysql" {
-		f.db, err = sql.Open("mysql", f.DNS)
+		f.db, err = sql.Open(f.DBType, f.ConnString)
 		if err != nil {
 			log.Error("Failed to connect", err)
 			return err

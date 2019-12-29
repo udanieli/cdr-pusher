@@ -28,7 +28,7 @@ type ParseFields struct {
 type Config struct {
 	// First letter of variables need to be capital letter
 	StorageDestination string        "storage_destination"
-	PGDatasourcename   string        "pg_datasourcename"
+	DestPGConnString   string        "dest_pg_connectionstring"
 	TableDestination   string        "table_destination"
 	RiakConnect        string        "riak_connect"
 	RiakBucket         string        "riak_bucket"
@@ -44,7 +44,7 @@ type Config struct {
 	CDRSourceType      int           "cdr_source_type"
 	FakeCDR            string        "fake_cdr"
 	FakeAmountCDR      int           "fake_amount_cdr"
-	DBDNS              string        "db_dns"
+	SrcMysqlDNS        string        "db_mysql_connectionstring"
 }
 
 var config = Config{}

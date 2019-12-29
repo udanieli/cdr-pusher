@@ -73,8 +73,8 @@ Config file `/etc/cdr-pusher.yaml`:
     # Use this with Mysql!
     # Database DNS (https://github.com/go-sql-driver/mysql#dsn-data-source-name)
     # [username[:password]@][protocol[(address)]]/dbname[?param1=value1&...&paramN=valueN]
-    # eg. db_dns: "username:password@tcp(127.0.0.1:3306)/asterisk"
-    db_dns: ""
+    # eg. db_mysql_connectionstring: "username:password@tcp(127.0.0.1:3306)/asterisk"
+    db_mysql_connectionstring: ""
 
     # db_table: the DB table name
     db_table: "cdr"
@@ -138,7 +138,7 @@ Config file `/etc/cdr-pusher.yaml`:
 
     # Used when storage_dest_type = postgres
     # datasourcename: connect string to connect to PostgreSQL used by sql.Open
-    pg_datasourcename: "user=postgres password=password host=localhost port=5432 dbname=cdr-pusher sslmode=disable"
+    dest_pg_connectionstring: "user=postgres password=password host=localhost port=5432 dbname=cdr-pusher sslmode=disable"
 
     # Used when storage_dest_type = postgres
     # pg_store_table: the DB table name to store CDRs in Postgres

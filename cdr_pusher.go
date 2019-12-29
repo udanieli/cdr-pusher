@@ -29,7 +29,7 @@ const WAITTIME = 60
 func RunFetcher(config Config, chanRes chan map[int][]string, chanSync chan bool) {
 	f := new(SQLFetcher)
 	if config.StorageSource == "sqlite3" || config.StorageSource == "mysql" {
-		f.Init(config.DBFile, config.DBTable, config.MaxFetchBatch, config.CDRFields, config.DBIdField, config.DBFlagField, config.StorageSource, config.DBDNS)
+		f.Init(config.DBFile, config.DBTable, config.MaxFetchBatch, config.CDRFields, config.DBIdField, config.DBFlagField, config.StorageSource, config.SrcMysqlDNS)
 		for {
 			log.Info("RunFetcher waiting on chanSync before fetching")
 			<-chanSync
@@ -53,7 +53,7 @@ func DispatchPush(config Config, results map[int][]string) {
 	if config.StorageDestination == "postgres" {
 		// Push CDRs to PostgreSQL
 		pc := new(PGPusher)
-		pc.Init(config.PGDatasourcename, config.CDRFields, config.SwitchIP, config.CDRSourceType, config.TableDestination)
+		pc.Init(config.DestPGConnString, config.CDRFields, config.SwitchIP, config.CDRSourceType, config.TableDestination)
 		err := pc.Push(results)
 		if err != nil {
 			log.Error(err.Error())
