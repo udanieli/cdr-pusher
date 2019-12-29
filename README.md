@@ -25,7 +25,7 @@ Install Golang dependencies (Debian/Ubuntu):
     $ apt-get -y install bison
 
 
-Install GVM to select which version of Golang you want to install:
+(optional) Install GVM to select which version of Golang you want to install:
 
     $ bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
     $ source /root/.gvm/scripts/gvm
@@ -45,6 +45,7 @@ To install and run the cdr-pusher application, follow those steps:
     $ cd cdr-pusher
     $ export GOPATH=`pwd`
     $ make build
+    $ sudo make install  # installs config file only
     $ ./bin/cdr-pusher
 
 
@@ -58,7 +59,8 @@ and is installed at the following location: /etc/cdr-pusher.yaml
 
 ## Configuration file
 
-Config file `/etc/cdr-pusher.yaml`:
+Default config file is installed in `/etc/cdr-pusher.yaml`.
+On BSD OSes the path is `/usr/local/etc/cdr-pusher.yaml`:
 
     # CDR FETCHING - SOURCE
     # ---------------------

@@ -1,0 +1,41 @@
+BINARY = ./bin/cdr-pusher
+ETCDIR = /etc
+UNAME_S != uname -s
+GOPATH != pwd
+PREFIX = /usr/local
+GOBIN=$(GOPATH)/bin
+
+.PHONY: all
+
+
+all: build
+
+install: configfile logdir
+	install -m 0555 $(BINARY) $(PREFIX)/bin
+
+deps:
+	go get .
+
+clean:
+	rm $(BINARY)
+
+test:
+	go test .
+	golint
+
+servedoc:
+	godoc -http=:6060
+
+configfile:
+	install -m 0555 cdr-pusher.yaml $(ETCDIR)
+
+logdir:
+	@mkdir /var/log/cdr-pusher
+
+get:
+	@go get -d .
+
+build: get
+	@mkdir -p bin
+	@go build -a -o $(BINARY) .
+	@GOBIN=$(GOBIN) go install .
